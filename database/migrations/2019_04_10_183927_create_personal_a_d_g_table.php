@@ -44,28 +44,25 @@ class CreatePersonalADGTable extends Migration
             ->onDelete('cascade')// que se pueda eleminar osea trigger
             ->onUpdate('cascade'); //y se pueda actualizar
 
-            $table->string('nombre', 200);
-            $table->string('rfc', 20);
-            $table->string('curp', 20);
-            $table->string('sexo', 2);
-            $table->string('correo', 200);
-            $table->string('telefono_casa', 50);
-            $table->string('celular', 50);
-            $table->string('tipo_de_sangre', 10);
-            $table->string('alergia', 10);
-            $table->string('estado_civil', 50);
-            $table->string('pareja', 10);
-            $table->string('numero_de_segurp_social',100 );
-            $table->date('fecha_de_nacimiento');
-            $table->integer('edad')->unsigned();
-            $table->string('nacionalidad', 100);
-            $table->string('localidad_de_nacimiento', 200);
-            $table->string('municipio_de_nacimiento', 200);
+            $table->string('nombre', 200)->nullable();;
+            $table->string('rfc', 20)->nullable();;
+            $table->string('curp', 20)->nullable();;
+            $table->string('sexo', 2)->nullable();;
+            $table->string('correo', 200)->nullable();;
+            $table->string('telefono_casa', 50)->nullable();;
+            $table->string('celular', 50)->nullable();;
+            $table->string('tipo_de_sangre', 10)->nullable();;
+            $table->string('alergia', 10)->nullable();;
+            $table->string('estado_civil', 50)->nullable();;
+            $table->string('pareja', 10)->nullable();;
+            $table->string('numero_de_segurp_social',100 )->nullable();;
+            $table->date('fecha_de_nacimiento')->nullable();;
+            $table->integer('edad')->nullable();;
+            $table->string('nacionalidad', 100)->nullable();;
+            $table->string('localidad_de_nacimiento', 200)->nullable();;
+            $table->string('municipio_de_nacimiento', 200)->nullable();;
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
-
-
-            $table->timestamps();
         });
     }
 

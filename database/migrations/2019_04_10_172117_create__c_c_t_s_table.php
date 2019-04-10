@@ -17,7 +17,6 @@ class CreateCCTSTable extends Migration
             $table->bigIncrements('id');
             $table->string('CCT', 200);
             $table->string('nombre', 200);
-            $table->timestamps();
         });
     }
 

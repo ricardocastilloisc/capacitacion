@@ -16,7 +16,6 @@ class CreateMunicipioLaboralTable extends Migration
         Schema::create('municipioLaboral', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre', 200);
-            $table->timestamps();
         });
     }
 

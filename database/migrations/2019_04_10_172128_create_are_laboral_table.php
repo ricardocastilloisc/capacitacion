@@ -16,7 +16,7 @@ class CreateAreLaboralTable extends Migration
         Schema::create('areaLaboral', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre', 200);
-            $table->timestamps();
+
         });
     }
 
