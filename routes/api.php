@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::prefix('/personaladg')
+    ->name('personaladg.')
+    ->group(function () {
+        ////pruebas de rutas
+        Route::post('ListarPersonalADG', 'PesonaladgController@ListarPersonalADG')->name('ListarPersonalADG');
+    });
