@@ -29,12 +29,12 @@ class PesonaladgController extends Controller
                 'municipiolaboral.id')
             ->join(
                 'arealaboral',
-                'personaladg.cct_id',
+                'personaladg.arealaboral_id',
                 '=',
                 'arealaboral.id')
             ->join(
                 'ccts',
-                'personaladg.arealaboral_id',
+                'personaladg.cct_id',
                 '=',
                 'ccts.id')
             ->join(
@@ -66,7 +66,7 @@ class PesonaladgController extends Controller
                 'personaladg.nacionalidad as nacionalidad',
                 'personaladg.localidad_de_nacimiento as localidad_de_nacimiento',
                 'personaladg.municipio_de_nacimiento as municipio_de_nacimiento'
-            )
+            )->where('personaladg.id',3)
             ->paginate(
                 $request->paginacion
             );
