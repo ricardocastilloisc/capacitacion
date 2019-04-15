@@ -42,4 +42,10 @@ Route::prefix('/personaladg')
         Route::post('RegistrarMunicipiolaboral', 'PesonaladgController@RegistrarMunicipiolaboral')->name('RegistrarMunicipiolaboral');
         Route::post('ActualizarMunicipiolaboral', 'PesonaladgController@ActualizarMunicipiolaboral')->name('ActualizarMunicipiolaboral');
         Route::post('EliminarMunicipiolaboral', 'PesonaladgController@EliminarMunicipiolaboral')->name('EliminarMunicipiolaboral');
+        Route::post('ResgistrarPuestos', 'PesonaladgController@ResgistrarPuestos')->name('ResgistrarPuestos');
+        Route::post('ActualizarPuestos', 'PesonaladgController@ActualizarPuestos')->name('ActualizarPuestos');
+        Route::post('EliminarPuestos', 'PesonaladgController@EliminarPuestos')->name('EliminarPuestos');
+        Route::post('RegistrarArealaboral', 'PesonaladgController@RegistrarArealaboral')->name('RegistrarArealaboral');
+        Route::post('ActualizarArealaboral', 'PesonaladgController@ActualizarArealaboral')->name('ActualizarArealaboral');
+        Route::post('EliminarArealaboral', 'PesonaladgController@EliminarArealaboral')->name('EliminarArealaboral');
     });

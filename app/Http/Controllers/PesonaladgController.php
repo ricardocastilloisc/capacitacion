@@ -60,6 +60,37 @@ class PesonaladgController extends Controller
         'DetallePuestos' => $DetallePuestos
             ];
     }
+    public function ActualizarPuestos(Request $request)
+    {
+        DB::table('puestos')->where('id',$request->id_Puestos)
+            ->update(
+                [
+                    'nombre'  => $request->nombre
+                ]
+            );
+        return [
+            'codeStatus' => 200
+        ];
+    }
+    public function EliminarPuestos(Request $request)
+    {
+        DB::table('puestos')->where('id',$request->id_Puestos)
+            ->delete();
+        return [
+            'codeStatus' => 200
+        ];
+    }
+    public function ResgistrarPuestos(Request $request)
+    {
+        DB::table('puestos')->insert(
+            [
+                'nombre'  => $request->nombre
+            ]
+        );
+        return [
+            'codeStatus' => 200
+        ];
+    }
     public function ListadoArealaboral()
     {
         $arealaboral =  DB::table('arealaboral')->get();
@@ -76,6 +107,41 @@ class PesonaladgController extends Controller
         'DetalleArealaboral' => $DetalleArealaboral
             ];
     }
+    public function ActualizarArealaboral(Request $request)
+    {
+        DB::table('arealaboral')
+            ->where('id',$request->id_Arealaboral) ->update(
+                [
+                    'nombre'  => $request->nombre
+                ]
+            );
+        return [
+            'codeStatus' => 200
+        ];
+    }
+    public function EliminarArealaboral(Request $request)
+    {
+        DB::table('arealaboral')
+            ->where('id',$request->id_Arealaboral)
+            ->delete();
+        return [
+            'codeStatus' => 200
+        ];
+    }
+    public function RegistrarArealaboral(Request $request)
+    {
+        DB::table('arealaboral')->insert(
+            [
+                'nombre'  => $request->nombre
+            ]
+        );
+        return [
+            'codeStatus' => 200
+        ];
+    }
+
+
+
     public function ListadoMunicipiolaboral()
     {
         $municipiolaboral =  DB::table('municipiolaboral')->get();
