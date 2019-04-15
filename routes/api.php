@@ -48,4 +48,5 @@ Route::prefix('/personaladg')
         Route::post('RegistrarArealaboral', 'PesonaladgController@RegistrarArealaboral')->name('RegistrarArealaboral');
         Route::post('ActualizarArealaboral', 'PesonaladgController@ActualizarArealaboral')->name('ActualizarArealaboral');
         Route::post('EliminarArealaboral', 'PesonaladgController@EliminarArealaboral')->name('EliminarArealaboral');
+        Route::get('ExportarExcelPersonalADG', 'PesonaladgController@ExportarExcelPersonalADG')->name('ExportarExcelPersonalADG');
     });

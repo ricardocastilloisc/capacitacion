@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Exports\PersonalADGExport;
 use Illuminate\Http\Request;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PesonaladgController extends Controller
 {
@@ -448,12 +450,37 @@ class PesonaladgController extends Controller
         ];
     }
 
-    public function ListarPersonalADG(Request $request)
+
+
+
+
+
+// Para hacer la exportaciones es de la siguiente manera
+
+//php artisan make:export PersonalADGExport
+
+
+
+    public function ExportarExcelPersonalADG(Request $request)
     {
 
+        return Excel::download(new PersonalADGExport($request->busqueda, []), 'Reporte_Personal_ADG.xlsx');
+/*
+        if ($request->busqueda == 0 || !$request->busqueda )
+        {
+
+        }else {
+
+        }
+  */
+    }
 
 
 
+
+
+    public function ListarPersonalADG(Request $request)
+    {
  /*
   * esto es para agregar filtros
 
