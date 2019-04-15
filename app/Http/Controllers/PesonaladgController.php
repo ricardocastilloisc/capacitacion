@@ -176,6 +176,71 @@ class PesonaladgController extends Controller
             ->delete();
     }
 
+
+    public function ActualizarPersonalADG(Request $request)
+    {
+
+        /*JSON  para registrar
+         *
+         *
+         *
+         * {
+     "id_PersonalADG": 1716 ,
+	"municipio_id":1,
+	"cct_id": 1,
+	"arealaboral_id": 1,
+	"id_puesto": 1,
+	"nombre": "Ricardo Castillo",
+	"rfc": "caor930531",
+	"curp": "caor930531",
+	"sexo": "m",
+	"correo": "cre@efe.com",
+	"telefono_casa": "983-05-10",
+	"celular": "98310454",
+	"tipo_de_sangre": "o+",
+	"alergia": "si",
+	"estado_civil": "casado",
+	"pareja": "si",
+	"numero_de_segurp_social": "04-50",
+	"fecha_de_nacimiento": "2019-04-11",
+	"edad": 12,
+	"nacionalidad": "mexicana",
+	"localidad_de_nacimiento": "chetumal",
+	"municipio_de_nacimiento": "othon p blanco"
+}
+         *
+         * */
+        DB::table('personaladg')
+            ->where('personaladg.id',$request->id_PersonalADG)
+            ->update(
+                [
+                    'personaladg.municipio_id'  => $request->municipio_id,
+                    'personaladg.cct_id'  => $request->cct_id,
+                    'personaladg.arealaboral_id' => $request->arealaboral_id,
+                    'personaladg.id_puesto' => $request->id_puesto,
+                    'personaladg.nombre' => $request->nombre,
+                    'personaladg.rfc' => $request->rfc,
+                    'personaladg.curp' => $request->curp,
+                    'personaladg.sexo' => $request->sexo,
+                    'personaladg.correo' => $request->correo,
+                    'personaladg.telefono_casa' => $request->telefono_casa,
+                    'personaladg.celular' => $request->celular,
+                    'personaladg.tipo_de_sangre'  => $request->tipo_de_sangre,
+                    'personaladg.alergia' => $request->alergia,
+                    'personaladg.estado_civil' => $request->estado_civil,
+                    'personaladg.pareja'  => $request->pareja,
+                    'personaladg.numero_de_segurp_social' => $request->numero_de_segurp_social,
+                    'personaladg.fecha_de_nacimiento' => $request->fecha_de_nacimiento,
+                    'personaladg.edad' => $request->edad,
+                    'personaladg.nacionalidad'  => $request->nacionalidad,
+                    'personaladg.localidad_de_nacimiento' => $request->localidad_de_nacimiento,
+                    'personaladg.municipio_de_nacimiento'  => $request->municipio_de_nacimiento
+                ]
+            );
+    }
+
+
+
     public function RegistrarPersonalADG(Request $request)
     {
 

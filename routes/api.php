@@ -35,4 +35,5 @@ Route::prefix('/personaladg')
         Route::post('DetallePersonalADG', 'PesonaladgController@DetallePersonalADG')->name('DetallePersonalADG');
         Route::post('RegistrarPersonalADG', 'PesonaladgController@RegistrarPersonalADG')->name('RegistrarPersonalADG');
         Route::post('EliminarPersonalADG', 'PesonaladgController@EliminarPersonalADG')->name('EliminarPersonalADG');
+        Route::post('ActualizarPersonalADG', 'PesonaladgController@ActualizarPersonalADG')->name('ActualizarPersonalADG');
     });
