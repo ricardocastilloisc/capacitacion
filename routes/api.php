@@ -39,4 +39,7 @@ Route::prefix('/personaladg')
         Route::post('RegistrarCCT', 'PesonaladgController@RegistrarCCT')->name('RegistrarCCT');
         Route::post('ActualizarCCT', 'PesonaladgController@ActualizarCCT')->name('ActualizarCCT');
         Route::post('EliminarCCT', 'PesonaladgController@EliminarCCT')->name('EliminarCCT');
+        Route::post('RegistrarMunicipiolaboral', 'PesonaladgController@RegistrarMunicipiolaboral')->name('RegistrarMunicipiolaboral');
+        Route::post('ActualizarMunicipiolaboral', 'PesonaladgController@ActualizarMunicipiolaboral')->name('ActualizarMunicipiolaboral');
+        Route::post('EliminarMunicipiolaboral', 'PesonaladgController@EliminarMunicipiolaboral')->name('EliminarMunicipiolaboral');
     });

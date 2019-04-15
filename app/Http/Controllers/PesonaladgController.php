@@ -92,6 +92,41 @@ class PesonaladgController extends Controller
         'DetalleMunicipiolaboral' => $DetalleMunicipiolaboral
             ];
     }
+    public function ActualizarMunicipiolaboral(Request $request)
+    {
+       DB::table('municipiolaboral')
+            ->where('id',$request->id_Municipiolaboral)
+            ->update(
+                [
+                    'nombre'  => $request->nombre
+                ]
+            );
+        return [
+            'codeStatus' => 200
+        ];
+    }
+    public function EliminarMunicipiolaboral(Request $request)
+    {
+       DB::table('municipiolaboral')
+           ->where('id',$request->id_Municipiolaboral)
+           ->delete();
+        return [
+            'codeStatus' => 200
+        ];
+    }
+    public function RegistrarMunicipiolaboral(Request $request)
+    {
+        DB::table('municipiolaboral')->insert(
+            [
+                'nombre'  => $request->nombre
+            ]
+        );
+        return [
+            'codeStatus' => 200
+        ];
+
+
+    }
     public function ListadoCCTS()
     {
         $ccts =  DB::table('ccts')->get();
@@ -111,7 +146,7 @@ class PesonaladgController extends Controller
 
     public function ActualizarCCT(Request $request)
     {
-        $DetalleCCT =  DB::table('ccts')
+       DB::table('ccts')
             ->where('id',$request->id_cct)
             ->update(
                 [
@@ -119,22 +154,31 @@ class PesonaladgController extends Controller
                     'nombre'  => $request->nombre
                 ]
             );
+        return [
+            'codeStatus' => 200
+        ];
     }
     public function EliminarCCT(Request $request)
     {
-        $DetalleCCT =  DB::table('ccts')
+       DB::table('ccts')
             ->where('id',$request->id_cct)
             ->delete();
+        return [
+            'codeStatus' => 200
+        ];
     }
     public function RegistrarCCT(Request $request)
     {
-        $DetalleCCT =  DB::table('ccts')
+        DB::table('ccts')
             ->insert(
                 [
                     'CCT'  => $request->CCT,
                     'nombre'  => $request->nombre
                 ]
             );
+        return [
+            'codeStatus' => 200
+        ];
     }
 
 
@@ -202,6 +246,9 @@ class PesonaladgController extends Controller
         DB::table('personaladg')
             ->where('personaladg.id', '=', $request->idPersonalADG)
             ->delete();
+        return [
+            'codeStatus' => 200
+        ];
     }
 
 
@@ -265,6 +312,9 @@ class PesonaladgController extends Controller
                     'personaladg.municipio_de_nacimiento'  => $request->municipio_de_nacimiento
                 ]
             );
+        return [
+            'codeStatus' => 200
+        ];
     }
 
 
@@ -327,6 +377,9 @@ class PesonaladgController extends Controller
                     'personaladg.municipio_de_nacimiento'  => $request->municipio_de_nacimiento
                 ]
             );
+        return [
+            'codeStatus' => 200
+        ];
     }
 
     public function ListarPersonalADG(Request $request)
