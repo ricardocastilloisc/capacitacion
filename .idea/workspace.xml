@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d237d428-3306-4e1e-9eca-bd72d6491987" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PesonaladgController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PesonaladgController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/X397d436297665ac0f80333be9a2e3bd5.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/X446f5c342dcf88d3d2d3263b022b773e.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/X9a1f385cd729a965310c3b85b655713d.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xbddc1931989ca7dd6f6fe28da5cb88b5.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xdf3f8790ab872faf3cb968cf83712c94.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xe34fc7eb9f7925055ac132e08c5f2bdb.json" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +26,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PesonaladgController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
+            <state relative-caret-position="211">
+              <caret line="139" column="39" selection-start-line="138" selection-start-column="39" selection-end-line="139" selection-end-column="39" />
               <folding>
                 <element signature="e#39#67#0#PHP" expanded="true" />
               </folding>
@@ -30,7 +38,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/app.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
+            <state relative-caret-position="330">
               <caret line="227" selection-start-line="227" selection-end-line="227" />
             </state>
           </provider>
@@ -39,8 +47,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="20" selection-start-line="20" selection-end-line="25" selection-end-column="7" />
+            <state relative-caret-position="231">
+              <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -77,6 +85,9 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/PesonaladgController.php" />
       </list>
     </option>
+  </component>
+  <component name="PhpServers">
+    <servers />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -161,11 +172,10 @@
       <path value="$PROJECT_DIR$/vendor/maximebf/debugbar" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="92" />
-    <option name="y" value="-8" />
-    <option name="width" value="1346" />
-    <option name="height" value="696" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-7" />
+    <option name="width" value="697" />
+    <option name="height" value="743" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -225,7 +235,10 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/infraestructura-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
@@ -262,17 +275,20 @@
       <workItem from="1554916819316" duration="596000" />
       <workItem from="1554917435260" duration="6526000" />
       <workItem from="1554988486430" duration="5657000" />
+      <workItem from="1555093137840" duration="4958000" />
+      <workItem from="1555158077635" duration="2093000" />
+      <workItem from="1555335740333" duration="3369000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13481000" />
+    <option name="totallyTimeSpent" value="24713000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="752" extended-state="6" />
+    <frame x="-7" y="0" width="697" height="743" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3290469" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.4913658" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -285,7 +301,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49924356" visible="true" weight="0.31502423" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49924356" visible="true" weight="0.31967214" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50075644" side_tool="true" weight="0.31502423" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -368,17 +384,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="227" selection-start-line="227" selection-end-line="227" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="20" selection-start-line="20" selection-end-line="25" selection-end-column="7" />
+        <state relative-caret-position="231">
+          <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PesonaladgController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
+        <state relative-caret-position="211">
+          <caret line="139" column="39" selection-start-line="138" selection-start-column="39" selection-end-line="139" selection-end-column="39" />
           <folding>
             <element signature="e#39#67#0#PHP" expanded="true" />
           </folding>

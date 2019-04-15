@@ -23,4 +23,14 @@ Route::prefix('/personaladg')
     ->group(function () {
         ////pruebas de rutas
         Route::post('ListarPersonalADG', 'PesonaladgController@ListarPersonalADG')->name('ListarPersonalADG');
+        Route::get('ListadoTablasIndependientes', 'PesonaladgController@ListadoTablasIndependientes')->name('ListadoTablasIndependientes');
+        Route::get('ListadoCCTS', 'PesonaladgController@ListadoCCTS')->name('ListadoCCTS');
+        Route::get('ListadoMunicipiolaboral', 'PesonaladgController@ListadoMunicipiolaboral')->name('ListadoMunicipiolaboral');
+        Route::get('ListadoArealaboral', 'PesonaladgController@ListadoArealaboral')->name('ListadoArealaboral');
+        Route::get('ListadoPuestos', 'PesonaladgController@ListadoPuestos')->name('ListadoPuestos');
+        Route::post('DetalleCCT', 'PesonaladgController@DetalleCCT')->name('DetalleCCT');
+        Route::post('DetalleMunicipiolaboral', 'PesonaladgController@DetalleMunicipiolaboral')->name('DetalleMunicipiolaboral');
+        Route::post('DetalleArealaboral', 'PesonaladgController@DetalleArealaboral')->name('DetalleArealaboral');
+        Route::post('DetallePuestos', 'PesonaladgController@DetallePuestos')->name('DetallePuestos');
+        Route::post('DetallePersonalADG', 'PesonaladgController@DetallePersonalADG')->name('DetallePersonalADG');
     });
