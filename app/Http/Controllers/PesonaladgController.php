@@ -109,6 +109,34 @@ class PesonaladgController extends Controller
             ];
     }
 
+    public function ActualizarCCT(Request $request)
+    {
+        $DetalleCCT =  DB::table('ccts')
+            ->where('id',$request->id_cct)
+            ->update(
+                [
+                    'CCT'  => $request->CCT,
+                    'nombre'  => $request->nombre
+                ]
+            );
+    }
+    public function EliminarCCT(Request $request)
+    {
+        $DetalleCCT =  DB::table('ccts')
+            ->where('id',$request->id_cct)
+            ->delete();
+    }
+    public function RegistrarCCT(Request $request)
+    {
+        $DetalleCCT =  DB::table('ccts')
+            ->insert(
+                [
+                    'CCT'  => $request->CCT,
+                    'nombre'  => $request->nombre
+                ]
+            );
+    }
+
 
     public function DetallePersonalADG(Request $request)
     {
@@ -481,10 +509,6 @@ class PesonaladgController extends Controller
                     $request->paginacion
                 );
         }
-
-
-
-
 
         return [
             'pagination' => [
