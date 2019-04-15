@@ -33,4 +33,6 @@ Route::prefix('/personaladg')
         Route::post('DetalleArealaboral', 'PesonaladgController@DetalleArealaboral')->name('DetalleArealaboral');
         Route::post('DetallePuestos', 'PesonaladgController@DetallePuestos')->name('DetallePuestos');
         Route::post('DetallePersonalADG', 'PesonaladgController@DetallePersonalADG')->name('DetallePersonalADG');
+        Route::post('RegistrarPersonalADG', 'PesonaladgController@RegistrarPersonalADG')->name('RegistrarPersonalADG');
+        Route::post('EliminarPersonalADG', 'PesonaladgController@EliminarPersonalADG')->name('EliminarPersonalADG');
     });

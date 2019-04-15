@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d237d428-3306-4e1e-9eca-bd72d6491987" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PesonaladgController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PesonaladgController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/debugbar/X397d436297665ac0f80333be9a2e3bd5.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/debugbar/X446f5c342dcf88d3d2d3263b022b773e.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/debugbar/X9a1f385cd729a965310c3b85b655713d.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xbddc1931989ca7dd6f6fe28da5cb88b5.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xdf3f8790ab872faf3cb968cf83712c94.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/debugbar/Xe34fc7eb9f7925055ac132e08c5f2bdb.json" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PesonaladgController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="139" column="39" selection-start-line="138" selection-start-column="39" selection-end-line="139" selection-end-column="39" />
+            <state relative-caret-position="194">
+              <caret line="171" column="39" lean-forward="true" selection-start-line="171" selection-start-column="20" selection-end-line="171" selection-end-column="39" />
               <folding>
                 <element signature="e#39#67#0#PHP" expanded="true" />
               </folding>
@@ -47,8 +40,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
+            <state relative-caret-position="265">
+              <caret line="36" column="113" selection-start-line="36" selection-start-column="113" selection-end-line="36" selection-end-column="113" />
             </state>
           </provider>
         </entry>
@@ -81,8 +74,8 @@
         <option value="$PROJECT_DIR$/database/migrations/2019_04_10_172102_create_municipio_laboral_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_04_10_172151_create_puestos_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_04_10_183927_create_personal_a_d_g_table.php" />
-        <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/PesonaladgController.php" />
+        <option value="$PROJECT_DIR$/routes/api.php" />
       </list>
     </option>
   </component>
@@ -235,7 +228,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/infraestructura-master" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -277,12 +270,12 @@
       <workItem from="1554988486430" duration="5657000" />
       <workItem from="1555093137840" duration="4958000" />
       <workItem from="1555158077635" duration="2093000" />
-      <workItem from="1555335740333" duration="3369000" />
+      <workItem from="1555335740333" duration="5914000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24713000" />
+    <option name="totallyTimeSpent" value="27258000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="697" height="743" extended-state="0" />
@@ -400,15 +393,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
+        <state relative-caret-position="265">
+          <caret line="36" column="113" selection-start-line="36" selection-start-column="113" selection-end-line="36" selection-end-column="113" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PesonaladgController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="139" column="39" selection-start-line="138" selection-start-column="39" selection-end-line="139" selection-end-column="39" />
+        <state relative-caret-position="194">
+          <caret line="171" column="39" lean-forward="true" selection-start-line="171" selection-start-column="20" selection-end-line="171" selection-end-column="39" />
           <folding>
             <element signature="e#39#67#0#PHP" expanded="true" />
           </folding>
