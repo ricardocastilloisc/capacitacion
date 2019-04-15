@@ -459,20 +459,70 @@ class PesonaladgController extends Controller
 
 //php artisan make:export PersonalADGExport
 
+/// el json es parecido al listado la diferancia hay que mandar
+/// NombreReporte
+
 
 
     public function ExportarExcelPersonalADG(Request $request)
     {
 
-        return Excel::download(new PersonalADGExport($request->busqueda, []), 'Reporte_Personal_ADG.xlsx');
-/*
+        $filtros = [];
+
+        if($request->municipio_id !== null)
+        {
+            array_push($filtros,['personaladg.municipio_id','=', $request->municipio_id ]);
+        }
+        if($request->arealaboral_id !== null)
+        {
+            array_push($filtros,['personaladg.arealaboral_id','=', $request->arealaboral_id ]);
+        }
+        if($request->id_puesto !== null)
+        {
+            array_push($filtros,['personaladg.id_puesto','=', $request->id_puesto ]);
+        }
+        if($request->CCT !== null)
+        {
+            array_push($filtros,['ccts.CCT','like', '%'. $request->CCT  . '%' ]);
+        }
+        if($request->nombreCCT !== null)
+        {
+            array_push($filtros,['ccts.nombre','like', '%'. $request->nombreCCT  . '%' ]);
+        }
+        if($request->nombrePersonalADG !== null)
+        {
+            array_push($filtros,['personaladg.nombre','like', '%'. $request->nombrePersonalADG  . '%' ]);
+        }
+        if($request->rfc !== null)
+        {
+            array_push($filtros,['personaladg.rfc','like', '%'. $request->rfc  . '%' ]);
+        }
+        if($request->curp !== null)
+        {
+            array_push($filtros,['personaladg.rfc','like', '%'. $request->curp  . '%' ]);
+        }
+        if($request->sexo !== null)
+        {
+            array_push($filtros,['personaladg.sexo','=', $request->sexo ]);
+        }
+        if($request->tipo_de_sangre !== null)
+        {
+            array_push($filtros,['personaladg.tipo_de_sangre','like', '%'. $request->tipo_de_sangre . '%' ]);
+        }
+        if($request->estado_civil !== null)
+        {
+            array_push($filtros,['personaladg.estado_civil','=', $request->estado_civil]);
+        }
+
+        //return Excel::download(new PersonalADGExport($request->busqueda, []), 'Reporte_Personal_ADG.xlsx');
+
         if ($request->busqueda == 0 || !$request->busqueda )
         {
-
+            return Excel::download(new PersonalADGExport($request->busqueda, $filtros), $request->NombreReporte.'.xlsx');
         }else {
-
+            return Excel::download(new PersonalADGExport($request->busqueda, $filtros), $request->NombreReporte.'.xlsx'.'.xlsx');
         }
-  */
+
     }
 
 
