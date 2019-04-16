@@ -136,14 +136,26 @@ class PesonaladgController extends Controller
     }
     public function ActualizarArealaboral(Request $request)
     {
-        DB::table('arealaboral')
-            ->where('id',$request->id_Arealaboral) ->update(
-                [
-                    'nombre'  => $request->nombre
-                ]
-            );
+        $mensaje = '';
+        $pasaLaFuncion = false;
+        $validacion  = DB::table('arealaboral')->where('nombre',strtoupper(trim($request->nombre)))->exists();
+        if($validacion === false)
+        {
+            $pasaLaFuncion  = true;
+            $mensaje =  'Se ha actualizado exitosamente';
+            DB::table('arealaboral')
+                ->where('id',$request->id_Arealaboral) ->update(
+                    [
+                        'nombre'  => strtoupper(trim($request->nombre))
+                    ]
+                );
+        }else{
+            $mensaje = 'Ya existe el puesto';
+        }
         return [
-            'codeStatus' => 200
+            'codeStatus' => 200,
+            'mensaje' => $mensaje,
+            'pasaLaFuncion' => $pasaLaFuncion
         ];
     }
     public function EliminarArealaboral(Request $request)
@@ -157,13 +169,26 @@ class PesonaladgController extends Controller
     }
     public function RegistrarArealaboral(Request $request)
     {
-        DB::table('arealaboral')->insert(
-            [
-                'nombre'  => $request->nombre
-            ]
-        );
+        $mensaje = '';
+        $pasaLaFuncion = false;
+        $validacion  = DB::table('arealaboral')->where('nombre',strtoupper(trim($request->nombre)))->exists();
+        if($validacion === false)
+        {
+            $pasaLaFuncion  = true;
+            $mensaje =  'Se ha registrado exitosamente';
+            DB::table('arealaboral')
+                ->insert(
+                    [
+                        'nombre'  => strtoupper(trim($request->nombre))
+                    ]
+                );
+        }else{
+            $mensaje = 'Ya existe el puesto';
+        }
         return [
-            'codeStatus' => 200
+            'codeStatus' => 200,
+            'mensaje' => $mensaje,
+            'pasaLaFuncion' => $pasaLaFuncion
         ];
     }
 
@@ -185,15 +210,27 @@ class PesonaladgController extends Controller
     }
     public function ActualizarMunicipiolaboral(Request $request)
     {
-       DB::table('municipiolaboral')
-            ->where('id',$request->id_Municipiolaboral)
-            ->update(
-                [
-                    'nombre'  => $request->nombre
-                ]
-            );
+        $mensaje = '';
+        $pasaLaFuncion = false;
+        $validacion  = DB::table('municipiolaboral')->where('nombre',strtoupper(trim($request->nombre)))->exists();
+        if($validacion === false)
+        {
+            $pasaLaFuncion  = true;
+            $mensaje =  'Se ha actualizado exitosamente';
+            DB::table('municipiolaboral')
+                ->where('id',$request->id_Municipiolaboral)
+                ->update(
+                    [
+                        'nombre'  => strtoupper(trim($request->nombre))
+                    ]
+                );
+        }else{
+            $mensaje = 'Ya existe el puesto';
+        }
         return [
-            'codeStatus' => 200
+            'codeStatus' => 200,
+            'mensaje' => $mensaje,
+            'pasaLaFuncion' => $pasaLaFuncion
         ];
     }
     public function EliminarMunicipiolaboral(Request $request)
@@ -207,15 +244,27 @@ class PesonaladgController extends Controller
     }
     public function RegistrarMunicipiolaboral(Request $request)
     {
-        DB::table('municipiolaboral')->insert(
-            [
-                'nombre'  => $request->nombre
-            ]
-        );
+        $mensaje = '';
+        $pasaLaFuncion = false;
+        $validacion  = DB::table('municipiolaboral')->where('nombre',strtoupper(trim($request->nombre)))->exists();
+        if($validacion === false)
+        {
+            $pasaLaFuncion  = true;
+            $mensaje =  'Se ha registrado exitosamente';
+            DB::table('municipiolaboral')
+                ->insert(
+                    [
+                        'nombre'  => strtoupper(trim($request->nombre))
+                    ]
+                );
+        }else{
+            $mensaje = 'Ya existe el puesto';
+        }
         return [
-            'codeStatus' => 200
+            'codeStatus' => 200,
+            'mensaje' => $mensaje,
+            'pasaLaFuncion' => $pasaLaFuncion
         ];
-
 
     }
     public function ListadoCCTS()
@@ -237,16 +286,38 @@ class PesonaladgController extends Controller
 
     public function ActualizarCCT(Request $request)
     {
-       DB::table('ccts')
-            ->where('id',$request->id_cct)
-            ->update(
-                [
-                    'CCT'  => $request->CCT,
-                    'nombre'  => $request->nombre
-                ]
-            );
+        $mensaje = '';
+        $pasaLaFuncion = false;
+        $validacion  = DB::table('ccts')->where('nombre',strtoupper(trim($request->nombre)))->exists();
+        $validacion2  = DB::table('ccts')->where('CCT',strtoupper(trim($request->CCT)))->exists();
+        if($validacion === false)
+        {
+            if($validacion2 === false)
+            {
+                $pasaLaFuncion  = true;
+                $mensaje =  'Se ha actualizado exitosamente';
+                DB::table('ccts')
+                    ->where('id',$request->id_cct)
+                    ->update(
+                        [
+                            'CCT'  => strtoupper(trim($request->CCT)),
+                            'nombre'  => strtoupper(trim($request->nombre))
+                        ]
+                    );
+            }
+            else
+                {
+                    $mensaje = 'Ya existe el puesto';
+                }
+        }
+        else
+            {
+            $mensaje = 'Ya existe el puesto';
+            }
         return [
-            'codeStatus' => 200
+            'codeStatus' => 200,
+            'mensaje' => $mensaje,
+            'pasaLaFuncion' => $pasaLaFuncion
         ];
     }
     public function EliminarCCT(Request $request)
@@ -260,18 +331,39 @@ class PesonaladgController extends Controller
     }
     public function RegistrarCCT(Request $request)
     {
-        DB::table('ccts')
-            ->insert(
-                [
-                    'CCT'  => $request->CCT,
-                    'nombre'  => $request->nombre
-                ]
-            );
+        $mensaje = '';
+        $pasaLaFuncion = false;
+        $validacion  = DB::table('ccts')->where('nombre',strtoupper(trim($request->nombre)))->exists();
+        $validacion2  = DB::table('ccts')->where('CCT',strtoupper(trim($request->CCT)))->exists();
+        if($validacion === false)
+        {
+            if($validacion2 === false)
+            {
+                $pasaLaFuncion  = true;
+                $mensaje =  'Se ha registrado exitosamente';
+                DB::table('ccts')
+                    ->insert(
+                        [
+                            'CCT'  => strtoupper(trim($request->CCT)),
+                            'nombre'  => strtoupper(trim($request->nombre))
+                        ]
+                    );
+            }
+            else
+            {
+                $mensaje = 'Ya existe el puesto';
+            }
+        }
+        else
+        {
+            $mensaje = 'Ya existe el puesto';
+        }
         return [
-            'codeStatus' => 200
+            'codeStatus' => 200,
+            'mensaje' => $mensaje,
+            'pasaLaFuncion' => $pasaLaFuncion
         ];
     }
-
 
     public function DetallePersonalADG(Request $request)
     {
@@ -329,7 +421,6 @@ class PesonaladgController extends Controller
         return [
             'DetallePersonalADG' => $DetallePersonalADG
         ];
-
     }
 
     public function EliminarPersonalADG(Request $request)
@@ -341,7 +432,6 @@ class PesonaladgController extends Controller
             'codeStatus' => 200
         ];
     }
-
 
     public function ActualizarPersonalADG(Request $request)
     {
@@ -376,35 +466,66 @@ class PesonaladgController extends Controller
 }
          *
          * */
-        DB::table('personaladg')
-            ->where('personaladg.id',$request->id_PersonalADG)
-            ->update(
-                [
-                    'personaladg.municipio_id'  => $request->municipio_id,
-                    'personaladg.cct_id'  => $request->cct_id,
-                    'personaladg.arealaboral_id' => $request->arealaboral_id,
-                    'personaladg.id_puesto' => $request->id_puesto,
-                    'personaladg.nombre' => $request->nombre,
-                    'personaladg.rfc' => $request->rfc,
-                    'personaladg.curp' => $request->curp,
-                    'personaladg.sexo' => $request->sexo,
-                    'personaladg.correo' => $request->correo,
-                    'personaladg.telefono_casa' => $request->telefono_casa,
-                    'personaladg.celular' => $request->celular,
-                    'personaladg.tipo_de_sangre'  => $request->tipo_de_sangre,
-                    'personaladg.alergia' => $request->alergia,
-                    'personaladg.estado_civil' => $request->estado_civil,
-                    'personaladg.pareja'  => $request->pareja,
-                    'personaladg.numero_de_segurp_social' => $request->numero_de_segurp_social,
-                    'personaladg.fecha_de_nacimiento' => $request->fecha_de_nacimiento,
-                    'personaladg.edad' => $request->edad,
-                    'personaladg.nacionalidad'  => $request->nacionalidad,
-                    'personaladg.localidad_de_nacimiento' => $request->localidad_de_nacimiento,
-                    'personaladg.municipio_de_nacimiento'  => $request->municipio_de_nacimiento
-                ]
-            );
+        $mensaje = '';
+        $pasaLaFuncion = false;
+        $validacion  = DB::table('personaladg')->where('nombre',strtoupper(trim($request->nombre)))->exists();
+        $validacion2  = DB::table('personaladg')->where('rfc',strtoupper(trim($request->rfc)))->exists();
+        $validacion3  = DB::table('personaladg')->where('curp',strtoupper(trim($request->curp)))->exists();
+        if($validacion === false)
+        {
+            if($validacion2 === false)
+            {
+                if($validacion3 === false)
+                {
+                    $pasaLaFuncion  = true;
+                    $mensaje =  'Se ha actualizado exitosamente';
+                    DB::table('personaladg')
+                        ->where('personaladg.id',$request->id_PersonalADG)
+                        ->update(
+                            [
+                                'personaladg.municipio_id'  => $request->municipio_id,
+                                'personaladg.cct_id'  => $request->cct_id,
+                                'personaladg.arealaboral_id' => $request->arealaboral_id,
+                                'personaladg.id_puesto' => $request->id_puesto,
+                                'personaladg.nombre' => strtoupper(trim($request->nombre)),
+                                'personaladg.rfc' => strtoupper(trim($request->rfc)),
+                                'personaladg.curp' => strtoupper(trim($request->curp)),
+                                'personaladg.sexo' => strtoupper(trim($request->sexo)),
+                                'personaladg.correo' => strtolower(trim($request->correo)),
+                                'personaladg.telefono_casa' => $request->telefono_casa,
+                                'personaladg.celular' => $request->celular,
+                                'personaladg.tipo_de_sangre'  => strtoupper(trim($request->tipo_de_sangre)),
+                                'personaladg.alergia' => strtoupper(trim($request->alergia)),
+                                'personaladg.estado_civil' => strtoupper(trim($request->estado_civil)),
+                                'personaladg.pareja'  => strtoupper(trim($request->pareja)),
+                                'personaladg.numero_de_segurp_social' => $request->numero_de_segurp_social,
+                                'personaladg.fecha_de_nacimiento' => $request->fecha_de_nacimiento,
+                                'personaladg.edad' => $request->edad,
+                                'personaladg.nacionalidad'  =>strtoupper(trim( $request->nacionalidad)),
+                                'personaladg.localidad_de_nacimiento' => strtoupper(trim($request->localidad_de_nacimiento)),
+                                'personaladg.municipio_de_nacimiento'  => strtoupper(trim($request->municipio_de_nacimiento))
+                            ]
+                        );
+                }
+                else
+                {
+                    $mensaje = 'Ya existe el puesto';
+                }
+            }
+            else
+            {
+                $mensaje = 'Ya existe el puesto';
+            }
+        }
+        else
+        {
+            $mensaje = 'Ya existe el puesto';
+        }
+
         return [
-            'codeStatus' => 200
+            'codeStatus' => 200,
+            'mensaje' => $mensaje,
+            'pasaLaFuncion' => $pasaLaFuncion
         ];
     }
 
@@ -442,34 +563,64 @@ class PesonaladgController extends Controller
 }
          *
          * */
-        DB::table('personaladg')
-            ->insert(
-                [
-                    'personaladg.municipio_id'  => $request->municipio_id,
-                    'personaladg.cct_id'  => $request->cct_id,
-                    'personaladg.arealaboral_id' => $request->arealaboral_id,
-                    'personaladg.id_puesto' => $request->id_puesto,
-                    'personaladg.nombre' => $request->nombre,
-                    'personaladg.rfc' => $request->rfc,
-                    'personaladg.curp' => $request->curp,
-                    'personaladg.sexo' => $request->sexo,
-                    'personaladg.correo' => $request->correo,
-                    'personaladg.telefono_casa' => $request->telefono_casa,
-                    'personaladg.celular' => $request->celular,
-                    'personaladg.tipo_de_sangre'  => $request->tipo_de_sangre,
-                    'personaladg.alergia' => $request->alergia,
-                    'personaladg.estado_civil' => $request->estado_civil,
-                    'personaladg.pareja'  => $request->pareja,
-                    'personaladg.numero_de_segurp_social' => $request->numero_de_segurp_social,
-                    'personaladg.fecha_de_nacimiento' => $request->fecha_de_nacimiento,
-                    'personaladg.edad' => $request->edad,
-                    'personaladg.nacionalidad'  => $request->nacionalidad,
-                    'personaladg.localidad_de_nacimiento' => $request->localidad_de_nacimiento,
-                    'personaladg.municipio_de_nacimiento'  => $request->municipio_de_nacimiento
-                ]
-            );
+        $mensaje = '';
+        $pasaLaFuncion = false;
+        $validacion  = DB::table('personaladg')->where('nombre',strtoupper(trim($request->nombre)))->exists();
+        $validacion2  = DB::table('personaladg')->where('rfc',strtoupper(trim($request->rfc)))->exists();
+        $validacion3  = DB::table('personaladg')->where('curp',strtoupper(trim($request->curp)))->exists();
+        if($validacion === false)
+        {
+            if($validacion2 === false)
+            {
+                if($validacion3 === false)
+                {
+                    $pasaLaFuncion  = true;
+                    $mensaje =  'Se ha registrado exitosamente';
+                    DB::table('personaladg')
+                        ->insert(
+                            [
+                                'personaladg.municipio_id'  => $request->municipio_id,
+                                'personaladg.cct_id'  => $request->cct_id,
+                                'personaladg.arealaboral_id' => $request->arealaboral_id,
+                                'personaladg.id_puesto' => $request->id_puesto,
+                                'personaladg.nombre' => strtoupper(trim($request->nombre)),
+                                'personaladg.rfc' => strtoupper(trim($request->rfc)),
+                                'personaladg.curp' => strtoupper(trim($request->curp)),
+                                'personaladg.sexo' => strtoupper(trim($request->sexo)),
+                                'personaladg.correo' => strtolower(trim($request->correo)),
+                                'personaladg.telefono_casa' => $request->telefono_casa,
+                                'personaladg.celular' => $request->celular,
+                                'personaladg.tipo_de_sangre'  => strtoupper(trim($request->tipo_de_sangre)),
+                                'personaladg.alergia' => strtoupper(trim($request->alergia)),
+                                'personaladg.estado_civil' => strtoupper(trim($request->estado_civil)),
+                                'personaladg.pareja'  => strtoupper(trim($request->pareja)),
+                                'personaladg.numero_de_segurp_social' => $request->numero_de_segurp_social,
+                                'personaladg.fecha_de_nacimiento' => $request->fecha_de_nacimiento,
+                                'personaladg.edad' => $request->edad,
+                                'personaladg.nacionalidad'  =>strtoupper(trim( $request->nacionalidad)),
+                                'personaladg.localidad_de_nacimiento' => strtoupper(trim($request->localidad_de_nacimiento)),
+                                'personaladg.municipio_de_nacimiento'  => strtoupper(trim($request->municipio_de_nacimiento))
+                            ]
+                        );
+                }
+                else
+                {
+                    $mensaje = 'Ya existe el puesto';
+                }
+            }
+            else
+            {
+                $mensaje = 'Ya existe el puesto';
+            }
+        }
+        else
+        {
+            $mensaje = 'Ya existe el puesto';
+        }
         return [
-            'codeStatus' => 200
+            'codeStatus' => 200,
+            'mensaje' => $mensaje,
+            'pasaLaFuncion' => $pasaLaFuncion
         ];
     }
 
