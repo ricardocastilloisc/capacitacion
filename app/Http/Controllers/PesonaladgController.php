@@ -64,14 +64,49 @@ class PesonaladgController extends Controller
     }
     public function ActualizarPuestos(Request $request)
     {
-        DB::table('puestos')->where('id',$request->id_Puestos)
-            ->update(
+        $mensaje = '';
+        $pasaLaFuncion = false;
+        $validacion  = DB::table('puestos')->where('nombre',strtoupper(trim($request->nombre)))->exists();
+        if($validacion === false)
+        {
+            $pasaLaFuncion  = true;
+            $mensaje =  'Se ha actualizado exitosamente';
+            DB::table('puestos')
+            ->where('id', $request->id_Puestos)
+            ->update(['nombre'  => strtoupper(trim($request->nombre))]);
+
+        }else{
+            $mensaje = 'Ya existe el puesto';
+        }
+
+        return [
+            'codeStatus' => 200,
+            'mensaje' => $mensaje,
+            'pasaLaFuncion' => $pasaLaFuncion
+        ];
+    }
+    public function ResgistrarPuestos(Request $request)
+    {
+        $mensaje = '';
+        $pasaLaFuncion = false;
+        $validacion  = DB::table('puestos')->where('nombre',strtoupper(trim($request->nombre)))->exists();
+        if($validacion === false)
+        {
+            $pasaLaFuncion  = true;
+            $mensaje =  'Se ha registrado exitosamente';
+            DB::table('puestos')->insert(
                 [
-                    'nombre'  => $request->nombre
+                    'nombre'  => strtoupper(trim($request->nombre))
                 ]
             );
+        }else{
+            $mensaje = 'Ya existe el puesto';
+        }
+
         return [
-            'codeStatus' => 200
+            'codeStatus' => 200,
+            'mensaje' => $mensaje,
+            'pasaLaFuncion' => $pasaLaFuncion
         ];
     }
     public function EliminarPuestos(Request $request)
@@ -82,17 +117,7 @@ class PesonaladgController extends Controller
             'codeStatus' => 200
         ];
     }
-    public function ResgistrarPuestos(Request $request)
-    {
-        DB::table('puestos')->insert(
-            [
-                'nombre'  => $request->nombre
-            ]
-        );
-        return [
-            'codeStatus' => 200
-        ];
-    }
+
     public function ListadoArealaboral()
     {
         $arealaboral =  DB::table('arealaboral')->get();
@@ -141,8 +166,6 @@ class PesonaladgController extends Controller
             'codeStatus' => 200
         ];
     }
-
-
 
     public function ListadoMunicipiolaboral()
     {
