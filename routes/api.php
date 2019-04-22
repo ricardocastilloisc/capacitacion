@@ -49,9 +49,15 @@ Route::prefix('/personaladg')
         Route::post('ActualizarArealaboral', 'PesonaladgController@ActualizarArealaboral')->name('ActualizarArealaboral');
         Route::post('EliminarArealaboral', 'PesonaladgController@EliminarArealaboral')->name('EliminarArealaboral');
         Route::post('ExportarExcelPersonalADG', 'PesonaladgController@ExportarExcelPersonalADG')->name('ExportarExcelPersonalADG');
-        Route::get('ListadoCursos', 'PesonaladgController@ListadoCursos')->name('ListadoCursos');
+        Route::post('ListadoCursos', 'PesonaladgController@ListadoCursos')->name('ListadoCursos');
         Route::post('DetalleCursos', 'PesonaladgController@DetalleCursos')->name('DetalleCursos');
         Route::post('ResgistrarCursos', 'PesonaladgController@ResgistrarCursos')->name('ResgistrarCursos');
         Route::post('ActualizarCursos', 'PesonaladgController@ActualizarCursos')->name('ActualizarCursos');
         Route::post('EliminarCursos', 'PesonaladgController@EliminarCursos')->name('EliminarCursos');
+        Route::post('ListarListadoCursosConPersonal', 'PesonaladgController@ListarListadoCursosConPersonal')->name('ListarListadoCursosConPersonal');
+        Route::get('ListadoCursosSelect', 'PesonaladgController@ListadoCursosSelect')->name('ListadoCursosSelect');
+        Route::post('ListarListadoCursosConPersonalDetallada', 'PesonaladgController@ListarListadoCursosConPersonalDetallada')->name('ListarListadoCursosConPersonalDetallada');
+        Route::post('ListarListadoCursosConPersonalRegistrar', 'PesonaladgController@ListarListadoCursosConPersonalRegistrar')->name('ListarListadoCursosConPersonalRegistrar');
+        Route::post('ListarListadoCursosConPersonalEliminar', 'PesonaladgController@ListarListadoCursosConPersonalEliminar')->name('ListarListadoCursosConPersonalEliminar');
+        Route::post('ListarListadoCursosConPersonalActualizar', 'PesonaladgController@ListarListadoCursosConPersonalActualizar')->name('ListarListadoCursosConPersonalActualizar');
     });

@@ -624,19 +624,12 @@ class PesonaladgController extends Controller
         ];
     }
 
-
-
-
-
-
 // Para hacer la exportaciones es de la siguiente manera
 
 //php artisan make:export PersonalADGExport
 
 /// el json es parecido al listado la diferancia hay que mandar
 /// NombreReporte
-
-
 
     public function ExportarExcelPersonalADG(Request $request)
     {
@@ -879,7 +872,6 @@ class PesonaladgController extends Controller
                     $request->paginacion
                 );
         }
-
         return [
             'pagination' => [
                 'total' => $ListadoPersonalADG->total(),
@@ -893,23 +885,90 @@ class PesonaladgController extends Controller
 
         ];
     }
-
-
-
-    public function ListadoCursos()
+    public function ListadoCursos(Request $request)
     {
-        $puestos =  DB::table('cursos')->get();
-
+        $ListadoCursos =  DB::table('cursos')->join(
+            'municipiolaboral',
+            'cursos.id_municipio',
+            '=',
+            'municipiolaboral.id')
+            ->select(
+                'cursos.id as id',
+                'cursos.nombre as NombreCurso',
+                'cursos.instructor as instructor',
+                'cursos.telefono_instructor as telefono_instructor',
+                'cursos.objetivo_curso as objetivo_curso',
+                'cursos.duracion as duracion',
+                'cursos.fecha_inicio as fecha_inicio',
+                'cursos.fecha_termino as fecha_termino',
+                'cursos.localidad as localidad',
+                'cursos.horario as horario',
+                'cursos.actualizable as actualizable',
+                'municipiolaboral.nombre as nombreMunicipio'
+            )
+            ->paginate(
+            $request->paginacion
+        );
         return [
-            'puestos' => $puestos
+            'pagination' => [
+                'total' => $ListadoCursos->total(),
+                'current_page' => $ListadoCursos->currentPage(),
+                'per_page' => $ListadoCursos->perPage(),
+                'last_page' => $ListadoCursos->lastPage(),
+                'from' => $ListadoCursos->firstItem(),
+                'to' => $ListadoCursos->lastItem(),
+            ],
+            'ListadoCursos' => $ListadoCursos,
+        ];
+    }
+    public function ListadoCursosSelect()
+    {
+        /*
+         *
+         "id": 9,
+            "nombre": "No Asignado",
+            "year": 2017,
+            "instructor": null,
+            "telefono_instructor": null,
+            "objetivo_curso": null,
+            "id_municipio": 9,
+            "duracion": null,
+            "fecha_inicio": null,
+            "fecha_termino": null,
+            "localidad": null,
+            "horario": null,
+            "actualizable": null
+         * */
+        $ListadoCursosSelect =  DB::table('cursos')->join(
+            'municipiolaboral',
+            'cursos.id_municipio',
+            '=',
+            'municipiolaboral.id')
+            ->select(
+                'cursos.id as id',
+                'cursos.nombre as NombreCurso',
+                'cursos.instructor as instructor',
+                'cursos.telefono_instructor as telefono_instructor',
+                'cursos.objetivo_curso as objetivo_curso',
+                'cursos.duracion as duracion',
+                'cursos.fecha_inicio as fecha_inicio',
+                'cursos.fecha_termino as fecha_termino',
+                'cursos.localidad as localidad',
+                'cursos.horario as horario',
+                'cursos.actualizable as actualizable',
+                'municipiolaboral.nombre as nombreMunicipio'
+            )
+            ->get();
+        return [
+            'ListadoCursosSelect' => $ListadoCursosSelect
         ];
     }
     public function DetalleCursos(Request $request)
     {
-        $DetallePuestos =  DB::table('cursos')->where('id',$request->id_cursos)->get();
+        $DetalleCursos =  DB::table('cursos')->where('id',$request->id_cursos)->get();
 
         return [
-            'DetallePuestos' => $DetallePuestos
+            'DetalleCursos' => $DetalleCursos
         ];
     }
 
@@ -997,4 +1056,361 @@ class PesonaladgController extends Controller
         ];
     }
     //
+
+
+
+    public function ListarListadoCursosConPersonal(Request $request)
+    {
+        /*
+         * esto es para agregar filtros
+
+        $filtros = [['personaladg.id','=',3 ]];
+
+           array_push($filtros,['rfc','=','BORA9002021SA']);
+
+           ->where($filtros)
+
+           */
+
+        if ($request->busqueda == 0 || !$request->busqueda )
+        {
+            $ListarListadoCursosConPersonal = DB::table('listadocursosconpersonal')
+            ->join(
+                'personaladg',
+                'listadocursosconpersonal.id_personaladg',
+                '=',
+                'personaladg.id')
+            ->join(
+                'cursos',
+                'listadocursosconpersonal.id_curso',
+                '=',
+                'cursos.id')
+            ->join(
+                'arealaboral',
+                'personaladg.arealaboral_id',
+                '=',
+                'arealaboral.id')
+            ->join(
+                'ccts',
+                'personaladg.cct_id',
+                '=',
+                'ccts.id')
+            ->join(
+                'puestos',
+                'personaladg.id_puesto',
+                '=',
+                'puestos.id')
+            ->join(
+                'municipiolaboral',
+                'cursos.id_municipio',
+                '=',
+                'municipiolaboral.id')
+            ->select(
+                'listadocursosconpersonal.id as id',
+                'personaladg.id as id_personaladg',
+                'ccts.CCT as CCT',
+                'ccts.nombre as NombreCCT',
+                'arealaboral.nombre as NombreArealaboral',
+                'puestos.nombre as NombrePuesto',
+                'personaladg.nombre as NombreCompletoPersonal',
+                'personaladg.rfc as rfc',
+                'personaladg.curp as curp',
+                'personaladg.correo as correo',
+                'personaladg.telefono_casa as telefono_casa',
+                'cursos.nombre as NomnbreCursos',
+                'cursos.year as year',
+                'cursos.fecha_inicio as fecha_inicio',
+                'cursos.fecha_termino as fecha_termino',
+                'cursos.localidad as localidad',
+                'cursos.horario as horario',
+                'cursos.actualizable as actualizable',
+                'municipiolaboral.nombre as nombreMunicipio'
+            )
+            ->paginate(
+                $request->paginacion
+            );
+
+        }else {
+
+            /*
+             * municipio_id->exacto
+		cct_id
+		arealaboral_id->exacto
+	id_puesto->exacto
+
+            nombreCCT
+
+
+
+            $request->busqueda
+            */
+
+            $filtros = [];
+
+            $saludo = '';
+            if($request->municipio_id !== null)
+            {
+                array_push($filtros,['cursos.id_municipio','=', $request->municipio_id ]);
+            }
+            if($request->arealaboral_id !== null)
+            {
+                array_push($filtros,['personaladg.arealaboral_id','=', $request->arealaboral_id ]);
+            }
+            if($request->id_puesto !== null)
+            {
+                array_push($filtros,['personaladg.id_puesto','=', $request->id_puesto ]);
+            }
+            if($request->CCT !== null)
+            {
+                array_push($filtros,['ccts.CCT','like', '%'. $request->CCT  . '%' ]);
+            }
+            if($request->nombreCCT !== null)
+            {
+                array_push($filtros,['ccts.nombre','like', '%'. $request->nombreCCT  . '%' ]);
+            }
+            if($request->nombrePersonalADG !== null)
+            {
+                array_push($filtros,['personaladg.nombre','like', '%'. $request->nombrePersonalADG  . '%' ]);
+            }
+            if($request->rfc !== null)
+            {
+                array_push($filtros,['personaladg.rfc','like', '%'. $request->rfc  . '%' ]);
+            }
+            if($request->curp !== null)
+            {
+                array_push($filtros,['personaladg.rfc','like', '%'. $request->curp  . '%' ]);
+            }
+            if($request->nombreCurso !== null)
+            {
+                array_push($filtros,['cursos.nombre','like', '%'. $request->nombreCurso  . '%' ]);
+            }
+            if($request->year !== null)
+            {
+                array_push($filtros,['cursos.year','=', $request->year ]);
+            }
+            if($request->actualizable !== null)
+            {
+                array_push($filtros,['cursos.actualizable','=', $request->actualizable ]);
+            }
+
+            $ListarListadoCursosConPersonal = DB::table('listadocursosconpersonal')
+                ->join(
+                    'personaladg',
+                    'listadocursosconpersonal.id_personaladg',
+                    '=',
+                    'personaladg.id')
+                ->join(
+                    'cursos',
+                    'listadocursosconpersonal.id_curso',
+                    '=',
+                    'cursos.id')
+                ->join(
+                    'arealaboral',
+                    'personaladg.arealaboral_id',
+                    '=',
+                    'arealaboral.id')
+                ->join(
+                    'ccts',
+                    'personaladg.cct_id',
+                    '=',
+                    'ccts.id')
+                ->join(
+                    'puestos',
+                    'personaladg.id_puesto',
+                    '=',
+                    'puestos.id')
+                ->join(
+                    'municipiolaboral',
+                    'cursos.id_municipio',
+                    '=',
+                    'municipiolaboral.id')
+                ->select(
+                    'listadocursosconpersonal.id as id',
+                    'personaladg.id as id_personaladg',
+                    'ccts.CCT as CCT',
+                    'ccts.nombre as NombreCCT',
+                    'arealaboral.nombre as NombreArealaboral',
+                    'puestos.nombre as NombrePuesto',
+                    'personaladg.nombre as NombreCompletoPersonal',
+                    'personaladg.rfc as rfc',
+                    'personaladg.curp as curp',
+                    'personaladg.correo as correo',
+                    'personaladg.telefono_casa as telefono_casa',
+                    'cursos.nombre as NomnbreCursos',
+                    'cursos.year as year',
+                    'cursos.fecha_inicio as fecha_inicio',
+                    'cursos.fecha_termino as fecha_termino',
+                    'cursos.localidad as localidad',
+                    'cursos.horario as horario',
+                    'cursos.actualizable as actualizable',
+                    'municipiolaboral.nombre as nombreMunicipio'
+                )
+                ->where($filtros)
+                ->paginate(
+                    $request->paginacion
+                );
+        }
+        return [
+            'pagination' => [
+                'total' => $ListarListadoCursosConPersonal->total(),
+                'current_page' => $ListarListadoCursosConPersonal->currentPage(),
+                'per_page' => $ListarListadoCursosConPersonal->perPage(),
+                'last_page' => $ListarListadoCursosConPersonal->lastPage(),
+                'from' => $ListarListadoCursosConPersonal->firstItem(),
+                'to' => $ListarListadoCursosConPersonal->lastItem(),
+            ],
+            'ListarListadoCursosConPersonal' => $ListarListadoCursosConPersonal,
+        ];
+    }
+
+    public function ListarListadoCursosConPersonalDetallada(Request $request)
+    {
+        $ListarListadoCursosConPersonalDetallada = DB::table('listadocursosconpersonal')
+            ->join(
+                'personaladg',
+                'listadocursosconpersonal.id_personaladg',
+                '=',
+                'personaladg.id')
+            ->join(
+                'cursos',
+                'listadocursosconpersonal.id_curso',
+                '=',
+                'cursos.id')
+            ->join(
+                'arealaboral',
+                'personaladg.arealaboral_id',
+                '=',
+                'arealaboral.id')
+            ->join(
+                'ccts',
+                'personaladg.cct_id',
+                '=',
+                'ccts.id')
+            ->join(
+                'puestos',
+                'personaladg.id_puesto',
+                '=',
+                'puestos.id')
+            ->join(
+                'municipiolaboral',
+                'cursos.id_municipio',
+                '=',
+                'municipiolaboral.id')
+            ->select(
+                'listadocursosconpersonal.id as id',
+                'personaladg.id as id_personaladg',
+                'ccts.CCT as CCT',
+                'ccts.nombre as NombreCCT',
+                'arealaboral.nombre as NombreArealaboral',
+                'puestos.nombre as NombrePuesto',
+                'personaladg.nombre as NombreCompletoPersonal',
+                'personaladg.rfc as rfc',
+                'personaladg.curp as curp',
+                'personaladg.correo as correo',
+                'personaladg.telefono_casa as telefono_casa',
+                'cursos.nombre as NomnbreCursos',
+                'cursos.year as year',
+                'cursos.fecha_inicio as fecha_inicio',
+                'cursos.fecha_termino as fecha_termino',
+                'cursos.localidad as localidad',
+                'cursos.horario as horario',
+                'cursos.actualizable as actualizable',
+                'municipiolaboral.nombre as nombreMunicipio'
+            )
+            ->where('personaladg.id', $request->id_personaladg)
+            ->paginate(
+                $request->paginacion
+            );
+
+        return [
+            'pagination' => [
+                'total' => $ListarListadoCursosConPersonalDetallada->total(),
+                'current_page' => $ListarListadoCursosConPersonalDetallada->currentPage(),
+                'per_page' => $ListarListadoCursosConPersonalDetallada->perPage(),
+                'last_page' => $ListarListadoCursosConPersonalDetallada->lastPage(),
+                'from' => $ListarListadoCursosConPersonalDetallada->firstItem(),
+                'to' => $ListarListadoCursosConPersonalDetallada->lastItem(),
+            ],
+            'ListarListadoCursosConPersonalDetallada' => $ListarListadoCursosConPersonalDetallada,
+        ];
+    }
+    public function ListarListadoCursosConPersonalRegistrar(Request $request)
+    {
+        $mensaje = '';
+        $pasaLaFuncion = false;
+        $validacion  = DB::table('listadocursosconpersonal')
+            ->where(
+
+                [
+                    ['id_personaladg','=', $request->id_personaladg ],
+                    ['id_curso','=', $request->id_curso ]
+                ]
+            )
+            ->exists();
+        if($validacion === false)
+        {
+            $pasaLaFuncion  = true;
+            $mensaje =  'Se ha registrado ha este curso';
+            DB::table('listadocursosconpersonal')->insert(
+                [
+                    'id_personaladg'  => $request->id_personaladg,
+                    'id_curso' =>  $request->id_curso,
+                ]
+            );
+
+        }else{
+            $mensaje = 'Ya se ha registrado ha este curso';
+        }
+        return [
+            'codeStatus' => 200,
+            'mensaje' => $mensaje,
+            'pasaLaFuncion' => $pasaLaFuncion
+        ];
+
+    }
+    public function ListarListadoCursosConPersonalActualizar(Request $request)
+    {
+        $mensaje = '';
+        $pasaLaFuncion = false;
+        $validacion  = DB::table('listadocursosconpersonal')
+            ->where(
+
+                [
+                    ['id_personaladg','=', $request->id_personaladg ],
+                    ['id_curso','=', $request->id_curso ]
+                ]
+            )
+            ->exists();
+        if($validacion === false)
+        {
+            $pasaLaFuncion  = true;
+            $mensaje =  'Se ha actualizado ha este curso';
+            DB::table('listadocursosconpersonal')
+                ->where('id',$request->id_listadocursosconpersonal)
+                ->update(
+                [
+                    'id_personaladg'  => $request->id_personaladg,
+                    'id_curso' =>  $request->id_curso,
+                ]
+            );
+
+        }else{
+            $mensaje = 'Ya se ha actualizado ha este curso';
+        }
+        return [
+            'codeStatus' => 200,
+            'mensaje' => $mensaje,
+            'pasaLaFuncion' => $pasaLaFuncion
+        ];
+    }
+    public function ListarListadoCursosConPersonalEliminar(Request $request)
+    {
+        DB::table('listadocursosconpersonal')->where('id',$request->id_listadocursosconpersonal)
+            ->delete();
+        return [
+            'codeStatus' => 200
+        ];
+    }
+
+
 }
