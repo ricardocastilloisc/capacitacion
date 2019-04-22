@@ -49,4 +49,9 @@ Route::prefix('/personaladg')
         Route::post('ActualizarArealaboral', 'PesonaladgController@ActualizarArealaboral')->name('ActualizarArealaboral');
         Route::post('EliminarArealaboral', 'PesonaladgController@EliminarArealaboral')->name('EliminarArealaboral');
         Route::post('ExportarExcelPersonalADG', 'PesonaladgController@ExportarExcelPersonalADG')->name('ExportarExcelPersonalADG');
+        Route::get('ListadoCursos', 'PesonaladgController@ListadoCursos')->name('ListadoCursos');
+        Route::post('DetalleCursos', 'PesonaladgController@DetalleCursos')->name('DetalleCursos');
+        Route::post('ResgistrarCursos', 'PesonaladgController@ResgistrarCursos')->name('ResgistrarCursos');
+        Route::post('ActualizarCursos', 'PesonaladgController@ActualizarCursos')->name('ActualizarCursos');
+        Route::post('EliminarCursos', 'PesonaladgController@EliminarCursos')->name('EliminarCursos');
     });

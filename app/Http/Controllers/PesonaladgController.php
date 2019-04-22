@@ -893,5 +893,108 @@ class PesonaladgController extends Controller
 
         ];
     }
+
+
+
+    public function ListadoCursos()
+    {
+        $puestos =  DB::table('cursos')->get();
+
+        return [
+            'puestos' => $puestos
+        ];
+    }
+    public function DetalleCursos(Request $request)
+    {
+        $DetallePuestos =  DB::table('cursos')->where('id',$request->id_cursos)->get();
+
+        return [
+            'DetallePuestos' => $DetallePuestos
+        ];
+    }
+
+    public function ResgistrarCursos(Request $request)
+    {
+        $mensaje = '';
+        $pasaLaFuncion = false;
+        $validacion  = DB::table('cursos')->where('nombre',strtoupper(trim($request->nombre)))->exists();
+        if($validacion === false)
+        {
+            $pasaLaFuncion  = true;
+            $mensaje =  'Se ha registrado exitosamente';
+            DB::table('cursos')->insert(
+                [
+                    'nombre'  => strtoupper(trim($request->nombre)),
+                    'year' =>  $request->year,
+                    'instructor' => strtoupper(trim($request->instructor)),
+                    'telefono_instructor' => strtoupper(trim($request->telefono_instructor)),
+                    'objetivo_curso' => strtoupper(trim($request->objetivo_curso)),
+                    'id_municipio' => $request->id_municipio,
+                    'duracion' => strtoupper(trim($request->duracion)),
+                    'fecha_inicio' => $request->fecha_inicio,
+                    'fecha_termino' => $request->fecha_termino,
+                    'localidad' => strtoupper(trim($request->localidad)),
+                    'horario' => strtoupper(trim($request->horario)),
+                    'actualizable' => strtoupper(trim($request->actualizable))
+                ]
+            );
+        }else{
+            $mensaje = 'Ya existe el puesto';
+        }
+
+        return [
+            'codeStatus' => 200,
+            'mensaje' => $mensaje,
+            'pasaLaFuncion' => $pasaLaFuncion
+        ];
+    }
+    public function EliminarCursos(Request $request)
+    {
+        DB::table('cursos')->where('id',$request->id_cursos)
+            ->delete();
+        return [
+            'codeStatus' => 200
+        ];
+    }
+
+
+    public function ActualizarCursos(Request $request)
+    {
+        $mensaje = '';
+        $pasaLaFuncion = false;
+        $validacion  = DB::table('cursos')->where('nombre',strtoupper(trim($request->nombre)))->exists();
+        if($validacion === false)
+        {
+            $pasaLaFuncion  = true;
+            $mensaje =  'Se ha actualizado exitosamente';
+            DB::table('cursos')
+                ->where('id', $request->id_cursos)
+                ->update(
+                    [
+                        'nombre'  => strtoupper(trim($request->nombre)),
+                        'year' =>  $request->year,
+                        'instructor' => strtoupper(trim($request->instructor)),
+                        'telefono_instructor' => strtoupper(trim($request->telefono_instructor)),
+                        'objetivo_curso' => strtoupper(trim($request->objetivo_curso)),
+                        'id_municipio' => $request->id_municipio,
+                        'duracion' => strtoupper(trim($request->duracion)),
+                        'fecha_inicio' => $request->fecha_inicio,
+                        'fecha_termino' => $request->fecha_termino,
+                        'localidad' => strtoupper(trim($request->localidad)),
+                        'horario' => strtoupper(trim($request->horario)),
+                        'actualizable' => strtoupper(trim($request->actualizable))
+                    ]
+                );
+
+        }else{
+            $mensaje = 'Ya existe el puesto';
+        }
+
+        return [
+            'codeStatus' => 200,
+            'mensaje' => $mensaje,
+            'pasaLaFuncion' => $pasaLaFuncion
+        ];
+    }
     //
 }
