@@ -667,7 +667,7 @@ class PesonaladgController extends Controller
         }
         if($request->curp !== null)
         {
-            array_push($filtros,['personaladg.rfc','like', '%'. $request->curp  . '%' ]);
+            array_push($filtros,['personaladg.curp','like', '%'. $request->curp  . '%' ]);
         }
         if($request->sexo !== null)
         {
@@ -809,7 +809,7 @@ class PesonaladgController extends Controller
             }
             if($request->curp !== null)
             {
-                array_push($filtros,['personaladg.rfc','like', '%'. $request->curp  . '%' ]);
+                array_push($filtros,['personaladg.curp','like', '%'. $request->curp  . '%' ]);
             }
             if($request->sexo !== null)
             {
@@ -1180,7 +1180,7 @@ class PesonaladgController extends Controller
             }
             if($request->curp !== null)
             {
-                array_push($filtros,['personaladg.rfc','like', '%'. $request->curp  . '%' ]);
+                array_push($filtros,['personaladg.curp','like', '%'. $request->curp  . '%' ]);
             }
             if($request->nombreCurso !== null)
             {
@@ -1453,7 +1453,7 @@ class PesonaladgController extends Controller
         }
         if($request->curp !== null)
         {
-            array_push($filtros,['personaladg.rfc','like', '%'. $request->curp  . '%' ]);
+            array_push($filtros,['personaladg.curp','like', '%'. $request->curp  . '%' ]);
         }
         if($request->nombreCurso !== null)
         {
@@ -1483,4 +1483,180 @@ class PesonaladgController extends Controller
 
     }
 
+
+
+    public function ListarListadoSinCursosConPersonal(Request $request)
+    {
+        /*
+         * esto es para agregar filtros
+
+        $filtros = [['personaladg.id','=',3 ]];
+
+           array_push($filtros,['rfc','=','BORA9002021SA']);
+
+           ->where($filtros)
+
+           */
+
+        if ($request->busqueda == 0 || !$request->busqueda ) {
+            $ListarListadoSinCursosConPersonal = DB::table('listadocursosconpersonal')
+                ->rightJoin
+                (
+                    'personaladg',
+                    'listadocursosconpersonal.id_personaladg',
+                    '=',
+                    'personaladg.id'
+                )
+                ->join(
+                    'ccts',
+                    'personaladg.cct_id',
+                    '=',
+                    'ccts.id')
+                ->join(
+                    'puestos',
+                    'personaladg.id_puesto',
+                    '=',
+                    'puestos.id')
+                ->join(
+                    'arealaboral',
+                    'personaladg.arealaboral_id',
+                    '=',
+                    'arealaboral.id')
+                ->join(
+                    'municipiolaboral',
+                    'personaladg.municipio_id',
+                    '=',
+                    'municipiolaboral.id')
+                ->select
+                (
+                    'personaladg.id as ID_PERSONAL_ADG',
+                    'personaladg.nombre as NOMBRE_COMPLETO',
+                    'personaladg.rfc as RFC',
+                    'personaladg.curp as CURP',
+                    'ccts.CCT as CCT',
+                    'ccts.nombre as NOMBRE_CCT',
+                    'arealaboral.nombre as NOMBRE_AREA_LABORAL',
+                    'puestos.nombre as NOMBRE_PUESTOS',
+                    'municipiolaboral.nombre as NOMBRE_MUNICIPIO_LABORAL',
+                    'personaladg.correo as CORREO',
+                    'personaladg.telefono_casa as TELEFONO_DE_CASA',
+                    'personaladg.celular as CELULAR'
+                )
+                ->whereNull('listadocursosconpersonal.id_curso')
+                ->paginate(
+                    $request->paginacion
+                );
+
+        }else {
+
+            /*
+             * municipio_id->exacto
+		cct_id
+		arealaboral_id->exacto
+	id_puesto->exacto
+
+            nombreCCT
+
+
+
+            $request->busqueda
+            */
+
+            $filtros = [];
+
+            $saludo = '';
+            if($request->municipio_id !== null)
+            {
+                array_push($filtros,['personaladg.municipio_id','=', $request->municipio_id ]);
+            }
+            if($request->arealaboral_id !== null)
+            {
+                array_push($filtros,['personaladg.arealaboral_id','=', $request->arealaboral_id ]);
+            }
+            if($request->id_puesto !== null)
+            {
+                array_push($filtros,['personaladg.id_puesto','=', $request->id_puesto ]);
+            }
+            if($request->CCT !== null)
+            {
+                array_push($filtros,['ccts.CCT','like', '%'. $request->CCT  . '%' ]);
+            }
+            if($request->nombreCCT !== null)
+            {
+                array_push($filtros,['ccts.nombre','like', '%'. $request->nombreCCT  . '%' ]);
+            }
+            if($request->nombrePersonalADG !== null)
+            {
+                array_push($filtros,['personaladg.nombre','like', '%'. $request->nombrePersonalADG  . '%' ]);
+            }
+            if($request->rfc !== null)
+            {
+                array_push($filtros,['personaladg.rfc','like', '%'. $request->rfc  . '%' ]);
+            }
+            if($request->curp !== null)
+            {
+                array_push($filtros,['personaladg.curp','like', '%'. $request->curp  . '%' ]);
+            }
+
+            $ListarListadoSinCursosConPersonal = DB::table('listadocursosconpersonal')
+                ->rightJoin
+                (
+                    'personaladg',
+                    'listadocursosconpersonal.id_personaladg',
+                    '=',
+                    'personaladg.id'
+                )
+                ->join(
+                    'ccts',
+                    'personaladg.cct_id',
+                    '=',
+                    'ccts.id')
+                ->join(
+                    'puestos',
+                    'personaladg.id_puesto',
+                    '=',
+                    'puestos.id')
+                ->join(
+                    'arealaboral',
+                    'personaladg.arealaboral_id',
+                    '=',
+                    'arealaboral.id')
+                ->join(
+                    'municipiolaboral',
+                    'personaladg.municipio_id',
+                    '=',
+                    'municipiolaboral.id')
+                ->select
+                (
+                    'personaladg.id as ID_PERSONAL_ADG',
+                    'personaladg.nombre as NOMBRE_COMPLETO',
+                    'personaladg.rfc as RFC',
+                    'personaladg.curp as CURP',
+                    'ccts.CCT as CCT',
+                    'ccts.nombre as NOMBRE_CCT',
+                    'arealaboral.nombre as NOMBRE_AREA_LABORAL',
+                    'puestos.nombre as NOMBRE_PUESTOS',
+                    'municipiolaboral.nombre as NOMBRE_MUNICIPIO_LABORAL',
+                    'personaladg.correo as CORREO',
+                    'personaladg.telefono_casa as TELEFONO_DE_CASA',
+                    'personaladg.celular as CELULAR'
+                )
+                ->whereNull('listadocursosconpersonal.id_curso')
+                ->where($filtros)
+                ->paginate(
+                    $request->paginacion
+                );
+        }
+        return [
+            'pagination' => [
+                'total' => $ListarListadoSinCursosConPersonal->total(),
+                'current_page' => $ListarListadoSinCursosConPersonal->currentPage(),
+                'per_page' => $ListarListadoSinCursosConPersonal->perPage(),
+                'last_page' => $ListarListadoSinCursosConPersonal->lastPage(),
+                'from' => $ListarListadoSinCursosConPersonal->firstItem(),
+                'to' => $ListarListadoSinCursosConPersonal->lastItem(),
+            ],
+            'ListarListadoSinCursosConPersonal' => $ListarListadoSinCursosConPersonal,
+        ];
+    }
 }
