@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Exports\PersonalADGExport;
+use App\Exports\ListadoCursosConPersonal;
 use Illuminate\Http\Request;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -687,7 +688,7 @@ class PesonaladgController extends Controller
         {
             return Excel::download(new PersonalADGExport($request->busqueda, $filtros), $request->NombreReporte.'.xlsx');
         }else {
-            return Excel::download(new PersonalADGExport($request->busqueda, $filtros), $request->NombreReporte.'.xlsx'.'.xlsx');
+            return Excel::download(new PersonalADGExport($request->busqueda, $filtros), $request->NombreReporte.'.xlsx');
         }
 
     }
@@ -1116,6 +1117,7 @@ class PesonaladgController extends Controller
                 'personaladg.rfc as rfc',
                 'personaladg.curp as curp',
                 'personaladg.correo as correo',
+                'personaladg.celular as celular',
                 'personaladg.telefono_casa as telefono_casa',
                 'cursos.nombre as NomnbreCursos',
                 'cursos.year as year',
@@ -1235,6 +1237,7 @@ class PesonaladgController extends Controller
                     'personaladg.rfc as rfc',
                     'personaladg.curp as curp',
                     'personaladg.correo as correo',
+                    'personaladg.celular as celular',
                     'personaladg.telefono_casa as telefono_casa',
                     'cursos.nombre as NomnbreCursos',
                     'cursos.year as year',
@@ -1307,6 +1310,7 @@ class PesonaladgController extends Controller
                 'personaladg.rfc as rfc',
                 'personaladg.curp as curp',
                 'personaladg.correo as correo',
+                'personaladg.celular as celular',
                 'personaladg.telefono_casa as telefono_casa',
                 'cursos.nombre as NomnbreCursos',
                 'cursos.year as year',
@@ -1412,5 +1416,71 @@ class PesonaladgController extends Controller
         ];
     }
 
+
+
+    public function ExportarExcelListadoCursoPersonal(Request $request)
+    {
+
+        $filtros = [];
+
+        if($request->municipio_id !== null)
+        {
+            array_push($filtros,['cursos.id_municipio','=', $request->municipio_id ]);
+        }
+        if($request->arealaboral_id !== null)
+        {
+            array_push($filtros,['personaladg.arealaboral_id','=', $request->arealaboral_id ]);
+        }
+        if($request->id_puesto !== null)
+        {
+            array_push($filtros,['personaladg.id_puesto','=', $request->id_puesto ]);
+        }
+        if($request->CCT !== null)
+        {
+            array_push($filtros,['ccts.CCT','like', '%'. $request->CCT  . '%' ]);
+        }
+        if($request->nombreCCT !== null)
+        {
+            array_push($filtros,['ccts.nombre','like', '%'. $request->nombreCCT  . '%' ]);
+        }
+        if($request->nombrePersonalADG !== null)
+        {
+            array_push($filtros,['personaladg.nombre','like', '%'. $request->nombrePersonalADG  . '%' ]);
+        }
+        if($request->rfc !== null)
+        {
+            array_push($filtros,['personaladg.rfc','like', '%'. $request->rfc  . '%' ]);
+        }
+        if($request->curp !== null)
+        {
+            array_push($filtros,['personaladg.rfc','like', '%'. $request->curp  . '%' ]);
+        }
+        if($request->nombreCurso !== null)
+        {
+            array_push($filtros,['cursos.nombre','like', '%'. $request->nombreCurso  . '%' ]);
+        }
+        if($request->year !== null)
+        {
+            array_push($filtros,['cursos.year','=', $request->year ]);
+        }
+        if($request->actualizable !== null)
+        {
+            array_push($filtros,['cursos.actualizable','=', $request->actualizable ]);
+        }
+
+        //return Excel::download(new PersonalADGExport($request->busqueda, []), 'Reporte_Personal_ADG.xlsx');
+
+        if ($request->busqueda == 0 || !$request->busqueda )
+        {
+            return Excel::download(new ListadoCursosConPersonal($request->busqueda, $filtros), $request->NombreReporte.'.xlsx');
+        }else {
+            return Excel::download(new ListadoCursosConPersonal($request->busqueda, $filtros), $request->NombreReporte.'.xlsx');
+        }
+
+        return [
+            'codeStatus' => 200
+        ];
+
+    }
 
 }

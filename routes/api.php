@@ -60,4 +60,5 @@ Route::prefix('/personaladg')
         Route::post('ListarListadoCursosConPersonalRegistrar', 'PesonaladgController@ListarListadoCursosConPersonalRegistrar')->name('ListarListadoCursosConPersonalRegistrar');
         Route::post('ListarListadoCursosConPersonalEliminar', 'PesonaladgController@ListarListadoCursosConPersonalEliminar')->name('ListarListadoCursosConPersonalEliminar');
         Route::post('ListarListadoCursosConPersonalActualizar', 'PesonaladgController@ListarListadoCursosConPersonalActualizar')->name('ListarListadoCursosConPersonalActualizar');
+        Route::post('ExportarExcelListadoCursoPersonal', 'PesonaladgController@ExportarExcelListadoCursoPersonal')->name('ExportarExcelListadoCursoPersonal');
     });
