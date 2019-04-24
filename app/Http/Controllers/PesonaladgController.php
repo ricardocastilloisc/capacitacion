@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Exports\PersonalADGExport;
 use App\Exports\ListadoCursosConPersonal;
+use App\Exports\ListadoSinCursosConPersonalExport;
 use Illuminate\Http\Request;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -690,7 +691,6 @@ class PesonaladgController extends Controller
         }else {
             return Excel::download(new PersonalADGExport($request->busqueda, $filtros), $request->NombreReporte.'.xlsx');
         }
-
     }
 
 
@@ -1658,5 +1658,57 @@ class PesonaladgController extends Controller
             ],
             'ListarListadoSinCursosConPersonal' => $ListarListadoSinCursosConPersonal,
         ];
+    }
+
+
+
+
+
+    public function ExportarListadoSinCursosConPersonalExport(Request $request)
+    {
+
+        $filtros = [];
+
+        if($request->municipio_id !== null)
+        {
+            array_push($filtros,['personaladg.municipio_id','=', $request->municipio_id ]);
+        }
+        if($request->arealaboral_id !== null)
+        {
+            array_push($filtros,['personaladg.arealaboral_id','=', $request->arealaboral_id ]);
+        }
+        if($request->id_puesto !== null)
+        {
+            array_push($filtros,['personaladg.id_puesto','=', $request->id_puesto ]);
+        }
+        if($request->CCT !== null)
+        {
+            array_push($filtros,['ccts.CCT','like', '%'. $request->CCT  . '%' ]);
+        }
+        if($request->nombreCCT !== null)
+        {
+            array_push($filtros,['ccts.nombre','like', '%'. $request->nombreCCT  . '%' ]);
+        }
+        if($request->nombrePersonalADG !== null)
+        {
+            array_push($filtros,['personaladg.nombre','like', '%'. $request->nombrePersonalADG  . '%' ]);
+        }
+        if($request->rfc !== null)
+        {
+            array_push($filtros,['personaladg.rfc','like', '%'. $request->rfc  . '%' ]);
+        }
+        if($request->curp !== null)
+        {
+            array_push($filtros,['personaladg.curp','like', '%'. $request->curp  . '%' ]);
+        }
+
+        //return Excel::download(new PersonalADGExport($request->busqueda, []), 'Reporte_Personal_ADG.xlsx');
+
+        if ($request->busqueda == 0 || !$request->busqueda )
+        {
+            return Excel::download(new ListadoSinCursosConPersonalExport($request->busqueda, $filtros), $request->NombreReporte.'.xlsx');
+        }else {
+            return Excel::download(new ListadoSinCursosConPersonalExport($request->busqueda, $filtros), $request->NombreReporte.'.xlsx');
+        }
     }
 }
